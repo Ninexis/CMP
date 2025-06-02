@@ -1,0 +1,37 @@
+- name: run-front
+  hosts: web
+  tasks:
+    - name: setup-ssh-matmat
+      ansible.builtin.shell: |
+        echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCWtHidKn+GLcE/Q4fHQyonV0CKfQ2CK1clmdZ0QREJdrFt8HPn9NMS0FyDp/p+2fFGyJbu13iXhM3sxCpdje+QIrb648EblkupQui4V+n+OnpC6nvF6hAtk09zW1peFHxhCyBL8atkOvwzOCsqbBneh2ObW9IXtUSRE4iInDHKSWOR3bJqN5QYZzHvvJYMUYPazUd43DwUzAQ+j3txNALSKTB/+I6G8UnThRXPs+ElnVgJ7/svRANwNnbQ34CCqAM+85xUQ7ZBUl3Gn50k2cBi+QERzSsqnyB+mhq9vdQm82isal8AI7+KYbibVBUyA3FPyKIGc9L0XAXpNcaQFOymmZ8HAoOWRFPYQZjMli2vXqpY+ioewxYpaVI32+qezZ/L+G3kH4TQdIZr0Q8V2Fvj7P18S5WIGPoAFCi0UGpfgX8Nj9QluKWzYCb59mV+Cd9xN5qzyCqT8WHh0P0eA1oct2hjhPaHEalG99cRLkDjNhLSK9ONqpmQbCAhyTHzM0= mathieuneumar@Host-003.lan" >> /home/ubuntu/.ssh/authorized_keys
+
+    - name: route-to-vite-port
+      ansible.builtin.shell: |
+        sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 5173
+
+    - name: Add Node.js 22.x repo from NodeSource
+      shell: curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+      args:
+        executable: /bin/bash
+      become: true
+
+    - name: Install Node.js and npm (v22)
+      apt:
+        name: nodejs
+        state: present
+        update_cache: yes
+      become: true
+
+    - name: clone-front
+      ansible.builtin.shell: |
+        cd $HOME
+        git clone https://github.com/Ninexis/app-arcl-front.git
+      args:
+        creates:
+          $HOME/app-arcl-front
+
+    - name: run-front
+      ansible.builtin.shell: |
+        cd $HOME/app-arcl-front
+        npm install
+        npm run dev &

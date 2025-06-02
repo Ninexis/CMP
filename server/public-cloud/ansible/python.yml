@@ -1,0 +1,13 @@
+- name: python-test
+  hosts: web
+  tasks:
+    - name: Install python3
+      apt:
+        name: python3
+        state: present
+        update_cache: yes
+      become: true
+
+    - name: python-test
+      ansible.builtin.shell: |
+        sudo python3 -m http.server 80

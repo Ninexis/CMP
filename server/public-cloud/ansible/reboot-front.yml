@@ -1,0 +1,10 @@
+- name: reboot-front
+  hosts: web
+  tasks:
+    - name: reboot-front
+      ansible.builtin.shell: |
+        cd $HOME/app-arcl-front
+        git pull
+        sudo pkill node
+        sudo npm run build
+        sudo serve -s dist -l 80 &
