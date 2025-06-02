@@ -9,7 +9,7 @@ const port = 4000;
 app.use(cors());
 
 app.get("/run-terraform", (_, res) => {
-  const scriptPath = path.resolve(__dirname, "../terraform-script");
+  const scriptPath = path.resolve(__dirname, "../vm-deploy-scripts");
   exec("terraform init && terraform apply -auto-approve", { cwd: scriptPath, shell: "/bin/sh" }, (error, stdout, stderr) => {
     if (error) {
       console.error(`Terraform Error: ${error.message}`);

@@ -1,0 +1,8 @@
+auth_url     = "http://34.159.53.80:5000/v3"
+ip           = "34.159.53.80"
+user_name    = "admin"
+password     = "bW1Bo0RV9ufJ9KL0IvmCiimGTe9oFubcwtqwcRIM"
+tenant_name  = "admin"
+domain_name  = "Default"
+security_group = "811abef4-1c98-491d-911a-a3f4d4ab8b95"
+flavor = "c209e6a5-d48f-45f3-8c53-00318f95b587"

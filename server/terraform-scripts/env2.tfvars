@@ -1,0 +1,8 @@
+auth_url     = "http://34.88.21.66:5000/v3"
+ip           = "34.88.21.66"
+user_name    = "admin"
+password     = "x2vrdORDVyHMXoX5gByhUGx6b5AT9rusc1kXCL5Y"
+tenant_name  = "admin"
+domain_name  = "Default"
+security_group = "05f30e9c-b41b-4854-b885-1372be29886d"
+flavor = "4e09d0f5-6a84-48e0-896f-adaf836a87cb"

@@ -1,0 +1,33 @@
+---
+#- debug:
+#    msg: "Inventory hostname is {{ inventory_hostname }}"
+
+- name: Configure port forwarding for backend VM
+  hosts: all
+  become: yes
+  vars_files:
+    - "vars/{{ inventory_hostname }}.yml"
+#  debug:
+#    msg: "Inventory hostname is {{ inventory_hostname }}"
+  tasks:
+    - name: Add PREROUTING NAT rule
+      ansible.builtin.iptables:
+        table: nat
+        chain: PREROUTING
+        protocol: tcp
+        destination_port: "{{ external_port }}"
+        jump: DNAT
+        to_destination: "{{ backend_vm_ip }}:5000"
+        comment: "Port forwarding to backend"
+
+    - name: Add FORWARD rule
+      ansible.builtin.iptables:
+        chain: FORWARD
+        protocol: tcp
+        destination: "{{ backend_vm_ip }}"
+        destination_port: "5000"
+        jump: ACCEPT
+        comment: "Allow traffic to backend"
+
+    - name: Save iptables rules
+      command: netfilter-persistent save
