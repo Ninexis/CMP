@@ -14,8 +14,8 @@ sudo -u ubuntu npm install
 CONFIG_FILE = /home/ubuntu/app-arcl-front/.env.production
 
 cat > "$CONFIG_FILE" <<EOF
-ADDR_MASTER="35.207.86.150:808${asg_number}"
-ADDR_SLAVE="35.217.57.158:808${asg_number}"
+VITE_ADDR_MASTER="35.207.86.150:808${asg_number}"
+VITE_ADDR_SLAVE="35.217.57.158:808${asg_number}"
 EOF
 
 npm install -g serve
