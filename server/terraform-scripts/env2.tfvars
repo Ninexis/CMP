@@ -1,5 +1,5 @@
-auth_url     = "http://34.88.21.66:5000/v3"
-ip           = "34.88.21.66"
+auth_url     = "http://35.217.57.158:5000/v3"
+ip           = "35.217.57.158"
 user_name    = "admin"
 password     = "x2vrdORDVyHMXoX5gByhUGx6b5AT9rusc1kXCL5Y"
 tenant_name  = "admin"

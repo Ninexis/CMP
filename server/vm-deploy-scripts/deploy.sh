@@ -93,4 +93,4 @@ echo $PORT > $PORT_FILE
 #----------------------------------------------------------------------------------------------------------------------
 
 
-printf "\n\n✅ Backend redondant déployé et disponible sur \n\n(master) 34.159.53.80:$PORT \n(slave) 34.88.21.66:$PORT \n\n(attendre ~2 min pour pouvoir curl)\n\n"
+printf "\n\n✅ Backend redondant déployé et disponible sur \n\n(master) 35.207.86.150:$PORT \n(slave) 35.217.57.158:$PORT \n\n(attendre ~2 min pour pouvoir curl)\n\n"
