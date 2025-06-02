@@ -10,9 +10,9 @@ app.use(cors());
 
 app.get("/run-terraform", (_, res) => {
   const scriptPath = path.resolve(__dirname, "../vm-deploy-scripts");
-  exec("terraform init && terraform apply -auto-approve", { cwd: scriptPath, shell: "/bin/sh" }, (error, stdout, stderr) => {
+  exec("./deploy.sh", { cwd: scriptPath, shell: "/bin/sh" }, (error, stdout, stderr) => {
     if (error) {
-      console.error(`Terraform Error: ${error.message}`);
+      console.error(`Erreur de déploiement: ${error.message}`);
       return res.status(500).send(`Terraform Error: ${error.message}`);
     }
     if (stderr) console.warn(`Terraform stderr: ${stderr}`);

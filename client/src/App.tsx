@@ -6,7 +6,7 @@ function App() {
   const deploy = async () => {
     setStatus("Deploying...");
     try {
-      const res = await fetch("http://34.159.209.174:4000/run-terraform");
+      const res = await fetch("http://35.207.149.232:4000/run-terraform");
       const text = await res.text();
       setStatus(text);
     } catch (err) {

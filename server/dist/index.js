@@ -11,10 +11,10 @@ const app = (0, express_1.default)();
 const port = 4000;
 app.use((0, cors_1.default)());
 app.get("/run-terraform", (_, res) => {
-    const scriptPath = path_1.default.resolve(__dirname, "../terraform-script");
-    (0, child_process_1.exec)("terraform init && terraform apply -auto-approve", { cwd: scriptPath, shell: "/bin/sh" }, (error, stdout, stderr) => {
+    const scriptPath = path_1.default.resolve(__dirname, "../vm-deploy-scripts");
+    (0, child_process_1.exec)("./deploy.sh", { cwd: scriptPath, shell: "/bin/sh" }, (error, stdout, stderr) => {
         if (error) {
-            console.error(`Terraform Error: ${error.message}`);
+            console.error(`Erreur de déploiement: ${error.message}`);
             return res.status(500).send(`Terraform Error: ${error.message}`);
         }
         if (stderr)
